@@ -7,6 +7,9 @@ export class CreateBodyDataDTO {
   readonly weight: number;
 
   @ApiProperty()
+  readonly date: string;
+
+  @ApiProperty()
   readonly bmi: number;
 
   @ApiProperty()
