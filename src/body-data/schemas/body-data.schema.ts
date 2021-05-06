@@ -2,9 +2,8 @@ import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 export const BodyDataSchema = new mongoose.Schema({
-  altezza: String,
-  peso: String,
-  dob: String,
+  height: Number,
+  weight: Number,
   bmi: Number,
   user: String,
 });

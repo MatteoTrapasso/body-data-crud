@@ -1,13 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateBodyDataDTO {
   @ApiProperty()
-  readonly height: string;
+  readonly height: number;
 
   @ApiProperty()
-  readonly weight: string;
-
-  @ApiProperty()
-  readonly dob: string;
+  readonly weight: number;
 
   @ApiProperty()
   readonly bmi: number;
