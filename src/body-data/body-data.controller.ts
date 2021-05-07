@@ -56,7 +56,7 @@ export class BodyDataController {
     });
   }
 
-  @Delete()
+  @Delete(':id')
   async delete(@Res() res, @Param('id') id: string) {
     const data = await this.BodyDataService.delete(id);
     if (!data) throw new NotFoundException('Post does not exist');
