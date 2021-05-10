@@ -5,6 +5,5 @@ export const BodyDataSchema = new mongoose.Schema({
   height: Number,
   weight: Number,
   date: String,
-  bmi: Number,
   user: String,
-});
+}, { versionKey: false });

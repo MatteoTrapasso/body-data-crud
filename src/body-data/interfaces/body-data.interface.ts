@@ -3,6 +3,5 @@ export interface BodyData extends Document {
   readonly height: number;
   readonly weight: number;
   readonly date: string;
-  readonly bmi: number;
   readonly user: string;
 }
