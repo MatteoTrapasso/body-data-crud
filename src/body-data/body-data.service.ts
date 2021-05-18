@@ -12,8 +12,8 @@ export class BodyDataService {
     const createdCat = new this.BodyDataModel(CreateBodyDataDTO);
     return createdCat.save();
   }
-  async findAll(): Promise<any> {
-    return await this.BodyDataModel.find().exec();
+  async findAll(user): Promise<any> {
+    return await this.BodyDataModel.find({ user: user }).exec();
   }
   async findById(id): Promise<BodyData> {
     const customer = await this.BodyDataModel.findById(id).exec();

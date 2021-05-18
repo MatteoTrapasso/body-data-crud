@@ -9,18 +9,20 @@ import {
   Param,
   NotFoundException,
   Put,
-  Delete,
+  Delete, Req,
 } from '@nestjs/common';
 import { BodyDataService } from './body-data.service';
 import { CreateBodyDataDTO } from './dto/body-data.dto';
 
 @Controller('body-data')
 export class BodyDataController {
-  constructor(private readonly BodyDataService: BodyDataService) {}
+  constructor(private readonly service: BodyDataService) {}
 
   @Post()
-  async addCustomer(@Res() res, @Body() CreateBodyDataDTO: CreateBodyDataDTO) {
-    const data = await this.BodyDataService.create(CreateBodyDataDTO);
+  async add(@Req() req, @Res() res, @Body() dto: CreateBodyDataDTO) {
+    const user = req.user.sub;
+    const createDTO = {...dto, user};
+    const data = await this.service.create(createDTO);
     return res.status(HttpStatus.OK).json({
       message: 'Post has been created successfully',
       data,
@@ -29,14 +31,15 @@ export class BodyDataController {
   }
 
   @Get()
-  async findAll(@Res() res) {
-    const data = await this.BodyDataService.findAll();
+  async findAll(@Res() res, @Req() req) {
+    const user = req.user.sub;
+    const data = await this.service.findAll(user);
     return res.status(HttpStatus.OK).json(data);
   }
 
   @Get(':id')
   async findById(@Res() res, @Param('id') id: string,) {
-    const data = await this.BodyDataService.findById(id);
+    const data = await this.service.findById(id);
     if (!data) throw new NotFoundException('Id does not exist!');
     return res.status(HttpStatus.OK).json(data);
   }
@@ -47,7 +50,7 @@ export class BodyDataController {
     @Param('id') id: string,
     @Body() CreateBodyDataDTO: CreateBodyDataDTO,
   ){
-    const data = await this.BodyDataService.update(id, CreateBodyDataDTO);
+    const data = await this.service.update(id, CreateBodyDataDTO);
     if (!data) throw new NotFoundException('Id does not exist!');
     return res.status(HttpStatus.OK).json({
       message: 'Post has been successfully updated',
@@ -58,7 +61,7 @@ export class BodyDataController {
 
   @Delete(':id')
   async delete(@Res() res, @Param('id') id: string) {
-    const data = await this.BodyDataService.delete(id);
+    const data = await this.service.delete(id);
     if (!data) throw new NotFoundException('Post does not exist');
     return res.status(HttpStatus.OK).json({
       message: 'Post has been deleted',
