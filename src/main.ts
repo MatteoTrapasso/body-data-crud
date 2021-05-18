@@ -6,7 +6,7 @@ async function bootstrap() {
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix);
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://body-data.herokuapp.com'],
+    origin: ['http://localhost:4200', 'https://body-data.herokuapp.com', 'https://body-data-crud.herokuapp.com'],
   });
   const options = new DocumentBuilder()
     .setTitle('body-data-crud')
