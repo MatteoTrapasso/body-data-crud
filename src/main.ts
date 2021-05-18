@@ -5,9 +5,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix);
-  app.enableCors({
+/*  app.enableCors({
     origin: ['http://localhost:4200', 'https://body-data.herokuapp.com'],
-  });
+  });*/
   const options = new DocumentBuilder()
     .setTitle('body-data-crud')
     .setDescription('CRUD per body-data')
